@@ -1,4 +1,5 @@
 from discord.ext import commands
+import discord
 
 
 class Greetings(commands.Cog):
@@ -21,3 +22,12 @@ class Greetings(commands.Cog):
         else:
             await ctx.send('Hello {0.name}... This feels familiar.'.format(member))
         self._last_member = member
+        await ctx.send(f"{1/0}")
+    @hello.error
+    async def example_error(self, ctx: commands.Context, error: commands.CommandError):
+        """Handle errors for the example command."""
+        
+        await ctx.send('Error: {}'.format(error))
+
+def setup(bot:commands.Bot):
+    bot.add_cog(Greetings(bot))
